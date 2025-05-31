@@ -1,0 +1,10 @@
+_____________________SET UP______________________
+1. Create API KEY from google
+2. Install Openai Agents
+3. Apply API_KEY in .env file
+4. Install python env package
+
+___________________CODING________________________
+5. Connection with your LLM
+6. Make an Agent
+7. Execute / Run the Agent
