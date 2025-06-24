@@ -1,0 +1,46 @@
+@function_tool
+def get_weather(city):
+    url = f"https://wttr.in/{city}?format=3"
+    res = requests.get(url)
+    return res.text
+
+
+🔍 What does format=3 mean in the wttr.in URL?
+
+wttr.in supports different output formats through the format parameter. These formats control how the weather data is displayed.
+
+✅ format=3 is one of the simplest formats:
+It returns a short, one-line summary:
+                Karachi: ☀️ +35°C
+
+This is:
+       Clean
+       Compact
+       Easy for developers or scripts to display
+
+🧱 Other Format Options in wttr.in
+     Format	Example Output	Purpose
+     format=1	Only weather symbols	Minimalistic
+     format=2	Location + symbol only	Slightly more info
+     format=3	City: 🌤 +32°C	Best for CLI / scripts
+     format=j1	JSON format	For developers (API-style output)
+     format=%t	Temperature only	You can customize output manually
+
+You can even mix fields like this:
+       https://wttr.in/karachi?format=%l:+%c+%t
+
+This might output:
+      Karachi: ☀️ +35°C
+
+More format codes:
+              %l: location
+              %c: condition (symbol)
+              %t: temperature
+              %w: wind
+              %h: humidity
+              (And many others)
+
+❓ Can you use format=3 in every URL?
+✅ Yes — as long as you're calling wttr.in, you can use ?format=3. It’s specific to wttr.in’s custom weather API.
+
+❌ But you can’t use format=3 in general websites or APIs — it won’t work with Google, OpenWeatherMap, or any unrelated services. It's only for wttr.in.
