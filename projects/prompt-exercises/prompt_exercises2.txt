@@ -1,0 +1,38 @@
+# Prompt Exercise:
+
+1. What's the weather going to be like in Dubai tomorrow afternoon?
+ - intent: get_weather
+ - location: Dubai
+ - time: tomorrow afternoon
+
+2. Find me some good Chinese restaurants near downtown that are open right now
+ - intent: find_restaurants
+ - cuisine: Chinese
+ - location: downtown
+ - time: open_now
+
+3. Send an email to Sarah about the project deadline being moved to next Wednesday
+ - intent: send_email
+ - recipient: Sarah
+ - subject: project deadline
+ - message: deadline moved to next Wednesday
+ - time: next Wednesday
+
+4. Schedule a meeting with the marketing team for this Friday at 2 PM about the new campaign
+ - intent: schedule_meeting
+ - attendees: marketing team
+ - time: this Friday at 2 PM
+ - topic: new campaign
+
+5. I want to buy a wireless Bluetooth headphones under $100 with good reviews
+ - intent: buy_product
+ - product: wireless Bluetooth headphones
+ - budget: 100$
+ - quality: good
+
+______________________________intent mean______________________________
+- intent refers to what the user wants to do — the goal or purpose of the request.
+- intent = the action the user is trying to perform.
+
+______________________________cuisine______________________________
+- Cuisine means the type or style of food. It usually refers to the food of a specific country or culture.
