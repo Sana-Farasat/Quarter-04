@@ -1,0 +1,39 @@
+Tools:
+- 2 Tools Hen Weather Or Dollar_rate.
+- Jb User_input M Query Weather Or Dollar_rate Dono Ki Ho Tw 2no Tools Hi Call Hngy.
+- Tools Ek Time M Multiple Bh Call Hoskte Hen Based On User Query.
+- Pehle Weather Then Dollar_rate Tool Bnaya.
+- User_input M Dono Tools Se Related Query Hai.
+- Now Question Is Agent Pehle Knsa Tool Call Krega? Jo Tool Pehle Bnaya Wo? Ya Jo Tool Pehle Tools K Parameter M Diya Wo?
+- Agent Pehle Knsa Tool Call Krega Ye Depend Krta Hai User Ki Query Pr Query Jis Tool Ki Pehle Hogi Wohi Tool Agent Pehle Call Krega. 
+
+_______________________________Example______________________________
+
+Tools:
+- weather
+- dollar_rate
+
+User Input:
+Tell me today’s weather and also dollar rate.
+(Input M Jis Tool Ki Query Pehle Hogi Triage Agent Wohi Tool Pehle Call Krega Chahy Tools K Parameter M Tools Ki Koe Bh Sequence Ho)
+
+Handoffs:
+- Handoffs Ek Time M Ek Hi Hta Hai Chahy Ktne Bh Handoffs Agent Ko Available Ho Or Chahy Sary Handoffs Ki User Query Mily Agent Ko But Agent Hmesha Ek Time M Ek Hi Handoff Krta Hai Tool Ki Trha Multiple Nh Hoskte Handoff Ek Time M.
+- Now Question Is If Query 2 Handoff Se Solve Ho Tw Agent Knsa Handoff Krega?
+- Jo Pehli Query Agent Ko Milegi Agent Usi Ko Handoff Krdega Baqi User Queries Jo Handoff Se Related Ho Unko Ignore Krdega. 
+- But If Ek Hi Query User Ne Esi Di Jiske Lye Dono Handoff Ko Ek Hi Time M Execute Kiye Bina Agent Answer Nh Deskta Tw Agent Kya Krega?
+- Agent Phr Confuse Hojaega Iske Lye Phr Input Guradrail M Logic Lkh Kr Lgani Pregi Taky User_input Triage Agent Tk Jae Hi Nh.
+
+_______________________________Example______________________________
+
+Sub Agents:
+- Frontend Developer
+- Backend Developer
+
+User Input:
+- Tell me roadmap for fullstack development. 
+(Ye Ek Esi Query Hai Jiske Lye Agent Ko Ek Hi Time M 2no Sub Agents Ko Handoff Krna Prega Iske Answer K Lye But Handoff Ek Time M 2 Nh Hte Tw Is Situation M Input Guradrail Ko Use Lazmi Use Kren.)
+
+Tools And Handoffs:
+  Agent Dono M Se Pehle Kisko Call Krta Hai?
+- Agent Hmesha Pehle Tools Call Krta Hai Then Handoff. 
