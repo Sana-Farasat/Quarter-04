@@ -2,11 +2,7 @@ from agents import Agent, AgentHooks, RunHooks, Runner, trace, function_tool
 from connection import config
 import asyncio
 from dotenv import load_dotenv
-import logging
-import rich 
-
-#Saving logs into file
-logging.basicConfig(filename='agent_logs.txt', level=logging.INFO) 
+import rich
 
 load_dotenv()
 
@@ -116,7 +112,7 @@ async def main():
 
         with trace("Quiz Practice"):
             result = await Runner.run(welcome_Agent, 
-                                      "i want peppori pizza", 
+                                      "we are 5 people and we would like to have vegetarian.", 
                                       run_config=config,
                                       hooks= MyRunHooks()
                                       )
