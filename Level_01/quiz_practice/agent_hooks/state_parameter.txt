@@ -1,0 +1,55 @@
+
+Why we use State parameter?
+
+state parameter ka matlab hai agent ke execution ka current context ya run-state object, jo SDK maintain karta hai.
+
+Ye ek internal object hota hai jisme agent ke execution ke dauraan wali sari temporary information hoti hai, jaise:
+
+Conversation history
+→ Ab tak user aur agent ke beech kya messages exchange huye.
+
+Current step metadata
+→ Abhi kaunsa reasoning step chal raha hai, ya tool call pending hai.
+
+Variables / memory
+→ Agar aapne agent ko memory di hai ya context carry ho raha hai.
+
+Run config details
+→ Jo config Runner.run(..., run_config=config) se pass hua.
+
+Execution status
+→ Abhi agent running hai, handoff pe hai, ya stop ho gaya.
+_________________________________________________________________________
+
+Hooks me state ka use kyu?
+
+Aapko sirf agent aur tool ka naam milne se kahin baar context clear nahi hota.
+state se aapko poori picture milti hai ke:
+
+Ab tak kya hua?
+
+Is waqt agent kis reasoning step me hai?
+
+Kitne retries huye?
+
+Conversation history kya hai?
+_________________________________________________________________________
+
+Example:
+Agar aap on_tool_start hook me sirf ye print karte:
+
+def on_tool_start(self, agent, tool, input, state):
+    print(f"{agent.name} calling {tool.name}")
+
+To bas yahi milega.
+
+Lekin agar aap state inspect karte:
+
+def on_tool_start(self, agent, tool, input, state):
+    print("Conversation so far:", state["messages"])
+
+To aapko poori conversation history bhi mil sakta hai.
+_________________________________________________________________________
+
+Short mein:
+state ek context dictionary/object hai jo agent ke run ke waqt wali sari information carry karta hai.
