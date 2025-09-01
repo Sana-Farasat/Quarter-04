@@ -52,7 +52,7 @@ def check_pizza_price(pizza_name: str) -> str:
         "Pepperoni": 15,
         "Vegetarian": 14
     }
-    price = pizza_menu.get(pizza_name, None)
+    price = pizza_menu.get(pizza_name)
     if price:
         return f"The price of {pizza_name} pizza is ${price}."
     else:
