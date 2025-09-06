@@ -16,6 +16,7 @@ def get_date():
 def multiply(num1: int, num2: int) -> int:
     return num1 * num2
 
+#____________________function_tool_settings_____________________
 agent=Agent(
     name="assistant",
     instructions="you are a helpful assistant",
