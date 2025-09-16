@@ -1,0 +1,21 @@
+is_enabled + tool_choice
+------------------------
+
+2 tools:
+- weather
+- dollar_rate
+
+case 1:
+      is_enabled: False
+      tool_choice: required
+      tool call nh hoga because llm ko tool visible nh bulke triage agent khd answer krega apna..
+
+case 2:
+      is_enabled: True
+      tool_choice: none
+      tool call nh hoga kyn k tool_choice none hai is case m bh triage agent khd answer krega apna..
+
+case 3:
+      is_enabled: True
+      tool_choice: auto
+      tool ki need hue tw llm tool call krlega..
