@@ -1,4 +1,4 @@
-### SDK Learning Sources
+# SDK Learning Sources
 
 ## OpenAI SDK Docs
 [Documentation](https://openai.github.io/openai-agents-python)
