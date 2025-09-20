@@ -1,7 +1,9 @@
 from connection import config
-from agents import (Agent, ModelSettings, Runner, function_tool, trace)
+from agents import (Agent, ModelSettings, Runner, enable_verbose_stdout_logging, function_tool, trace)
 import rich
 import asyncio
+
+enable_verbose_stdout_logging()
 
 #_________________________Function Tools___________________________
 
@@ -13,6 +15,18 @@ def weather():
 def dollar_rate():
      return "Dollar rate is 300."
 
+frontend_developer=Agent(
+     name="Frontend Developer",
+     instructions="Your task is to answer frontend related queries.."
+)
+
+#_________________________Sub Agents___________________________
+
+backend_developer=Agent(
+     name="Backend Developer",
+     instructions="Your task is to answer backend related queries.."
+)
+
 #_________________________Main Agent___________________________
 
 triage_agent= Agent(
@@ -22,7 +36,8 @@ triage_agent= Agent(
     by using available tools.
     """,
     tools=[weather, dollar_rate],
-    model_settings=ModelSettings(tool_choice= "auto"),
+    model_settings=ModelSettings(tool_choice= "required"),
+    handoffs=[frontend_developer, backend_developer]
 )
 
 #_________________________Main Runner___________________________
@@ -33,7 +48,7 @@ async def main():
 
             result= await Runner.run(
             triage_agent,
-            input= "What is today's dollar rate?",
+            input= "What is today's dollar rate? and what is today's weather? and what is html?",
             run_config= config
     )
             rich.print(result.final_output)
