@@ -1,0 +1,208 @@
+Model Settings :
+Hmari agentic application m hm jo model integrate krte hen model_setttings se uska behaviour control krte hen..
+
+model_setttings:
+Ye ek parameter hta hai jo hme agent k module se milti hai..
+
+ModelSetting:
+Ye ek class hti hai jo hme agent k module se milti hai..
+
+Where to pass:
+Isko hm apne agent ki class m pass krte hen or LLM ka behaviour control krte hen..
+
+Common parameters of ModelSettings:
+
+temperature:
+          Controls creativity vs accuracy..
+          (Means apka answer ktna focused/predictable way m ana chaiye ya ktna creative answer hna chaiye)
+
+For Example:
+        If koe maths question hai tw mje predictable way m answer chaiye..
+        If koe essay hai tw mje creative answer chaiye..
+        If koe out of the box / brainstorming idea ho tw mje random answer chaiye..
+
+temperature range: 
+            0.0 - 2.0
+
+- Predictable answers (math, factual Q/A): 0.1 – 0.5
+- Creative answers (essays, stories, poems): 0.6 – 1.0
+- Very random (brainstorming, out-of-box ideas): 1.1 – 2.0  
+
+---
+
+max_output_tokens:
+                Limit the length of responses..
+                (Means LLM se jo response ae wo ktna short ya ktna long hona chaiye)
+
+For Example:
+            If koe customer service/ factual lookups se related query ho tw LLM short response kre..
+            If koe tutorial / email se related query ho tw LLM medium answer kre..
+            If blogging / essay / articles se related query ho tw LLM long response kre..
+            If books / chapter / full code generation se related query ho tw LLM bht long response kre..
+
+tokens limit:
+            Short answers (≤100 tokens)
+            Medium answers (100 – 500 tokens)
+            Long answers (500 – 2000 tokens)
+            Very long (2000+ tokens)
+
+---
+
+top_p (nucleus sampling):
+                        Controls diversity of words picked.
+                        (LLM k pass bht sara data hta hai top_p control karta hai ke model kitni variety wale words consider kare response generate karte waqt mtlb model sirf sabse likely words pick kare ya thodi variety add kare)
+                        (Ye nucleus sampling ka part hai)
+
+For Example:
+            top_p = 1 (Full creativity)
+            top_p = 0.2 (Only pick the most likely words)
+
+top_p range: 
+            0.0 – 1.0
+            
+- Highly focused (factual Q/A, math, coding): 0.0 – 0.3
+- Balanced creativity (essays, tutorials, storytelling): 0.4 – 0.7
+- Very diverse & random (brainstorming, poetry, jokes): 0.8 – 1.0
+
+---
+
+top_k:
+        top_k ek aur sampling technique hai jo model ke output ko control karti hai..
+        Ye batata hai ke model sirf top k words consider kare agla word predict karte waqt..
+        Matlab agar top_k=50, to model sirf sabse zyada probability wale 50 words me se choose karega — baaki ignore ho jayenge..
+
+Use Case:
+
+- Low top_k (1–5) → Exact, deterministic answers (maths, facts, coding)..
+- Medium top_k (20–50) → Balanced answers (Q/A with some variety)..
+- High top_k (100–500) → Creative tasks (story writing, brainstorming)..
+
+---
+
+stop_sequences:
+            Tell the model to stop generating when a certain word/character is seen..
+            (stop_sequences batata hai ke model response kahan stop kare
+            means Jab model in sequences me se koi word ya phrase generate kare → output wahan stop ho jata hai)
+
+Range / Values:
+            Ye list of strings hoti hai, koi numerical range nahi hai..
+
+Use Cases:
+- Code generation -> stop_sequences=["```"] → code block ke baad generate band ho jaye..
+
+- Chatbot conversation -> stop_sequences=["User:"] → jab user ka next input start ho → model stop kare..
+
+---
+
+response_format:
+            Force the model to output in developer's desired, not free text..
+            (Means LLM ko force krte hen k output json / list / dict form m return kre)
+
+For Example:
+        
+- Text / String:
+        Sabse simple aur default..
+        Model plain text me answer deta hai..
+
+Use Case: 
+        Chatbots, Q/A, essays, stories
+
+- JSON Object / Dict:
+        Model output structured JSON/dict me return kare..
+        Useful jab frontend ya API ko structured data chahiye..
+        
+Use Case:
+        Weather app, dashboard
+
+- List / Array:
+            Jab multiple items return karne ho, jaise multiple suggestions, steps, etc.
+
+Use Case:
+        Brainstorming, recommendation lists
+
+- Custom / Mixed:
+                Kuch SDKs allow karte hain nested JSON ya custom structured format..
+
+Use Case:
+        Step-by-step guides, tutorials, structured tasks
+
+---
+
+frequency_penalty:
+             Discourages repetition of same word/phrase..
+             (Ye parameter LLM ko same word repeat krne se rokta hai)
+
+Use Case:
+        Prevents model from repeating "love love love love..." in generated text..
+
+---
+
+presence_penalty:
+                Encourages introducing new topics..
+                (Ye LLM ko force krta hai k new ideas generate kro, new ideas generate kro)
+
+Use Case:
+        Brainstorming new startup ideas..  
+
+---
+
+tool_choice:
+        By default, model auto-selects which tool to call..
+        You can force a specific tool..
+
+This parameter has three values:
+- auto
+- required
+- None
+- name_of_tool
+
+- auto: 
+        (default) → Model decides whether to use a tool..
+        If we set tool_choice "auto" that's mean LLM khd decide krega k tool call krna hai ya nh..
+
+- required:
+        Must use a tool for every response..
+        If we set tool_choice "required" that's mean LLM tool lazmi call krega chahe tool call krne ki need na bh ho tb bh call krega..
+
+- None: 
+        Forbid tool usage..
+        If we set tool_choice "None" that's mean LLM tool call nh krega ksi bh surat bh chahe tool call krne ki need ho..
+
+- name_of_tool:
+                Force a specific tool..
+                Jb hm koe specific tool lazmi call krwana ho..
+
+---
+
+parallel_tool_calls:
+                Run multiple tools at the same time..
+                (LLM by default step by step one by one tool call krta hai sary ek sth nh krta but if hm chahte hen k sary tools LLM ek sth call kre to hm is parameter ko set krte hen and it takes boolean value)
+
+Use Case:
+        Without it → first gets weather, then date..
+        With it → calls both tools in parallel → faster..
+
+---
+
+truncation ("auto" vs "disabled"):
+                LLMs have a context window (e.g., 128k tokens).
+                If input is too long, it can be truncated (cut short).
+
+Use Case:
+        For long docs → ensures model doesn’t crash..
+        (Means if hmara program esa hai jisme LLM long response generate krega tw hm is parameter ko set kr skte hen taky text cut hojae means "..." -> ye 3 dots ae text k end m jo indicate kre k text bht long hone ki wja se cut hua hai is trah hmara program crash nh hta)
+
+---
+
+max_tokens (output length):
+                Same as max_output_tokens, just newer name in some SDKs..
+
+---
+
+verbosity:
+        Controls how much detail the model includes..
+        (LLM hamari query se related ktni details provide kre is parameter se control krte hen)
+
+Use Case:
+        low → short answers (customer support)
+        high → detailed breakdown (education, tutoring)
